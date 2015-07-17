@@ -1,0 +1,105 @@
+ <!-- 
+ 	Calculadora de IMC
+ 	Author markinster : markinster@gmail.com
+ -->
+ <html>
+ 
+ <body style="background-color:  #4682B4; ">
+ 	<style type="text/css">
+ 		.painel {
+ 			margin-top: 8%;
+ 			margin-left: 20%;
+ 			margin-right: 20%;
+ 			background-color:  #ADD8E6; 
+ 		}
+
+ 	</style>
+ 
+ 	<script type="text/javascript">
+	
+			window.onload = function () {
+				document.title = "Calculadora de IMC";
+				document.getElementById("kilos").focus();	
+			}		
+				
+			function getAltura (metros, centimetros) {
+			    altura = metros * 100 + centimetros;
+				altura = altura / 100;
+				return altura;
+			}
+
+			function exibeMsg(bool) {
+				if (bool == true) {
+					document.getElementById("msg").innerHTML = "Aten&ccedil;&atilde;o! Use ponto (.) como separador decimal";
+				} else {
+					document.getElementById("msg").innerHTML = "";
+				}
+			}
+			
+			function calcularIMC() {
+				
+				var formulario = document.getElementById("formulario");				
+				var kilos = +formulario.kilos.value;			
+				var altura = getAltura(+formulario.metros.value, +formulario.cm.value);
+
+				//calcula IMC
+				var imc = kilos / (altura * altura);
+				
+				// avalia resultado
+				if (imc < 20) {
+					document.getElementById("resultado").innerHTML = "Abaixo do peso";		
+					document.getElementById("resultado").style.color = "red";						
+				} else if(imc < 25) {
+					document.getElementById("resultado").innerHTML = "Peso Normal";	
+					document.getElementById("resultado").style.color = "green";
+				} else if(imc < 30) {
+					document.getElementById("resultado").innerHTML = "Um pouco acima do Peso";
+					document.getElementById("resultado").style.color = "blue";					
+				} else if(imc < 35) {
+					document.getElementById("resultado").innerHTML = "Obesidade de GRAU 1";	
+					document.getElementById("resultado").style.color = "yellow";
+				} else if(imc < 40) {
+					document.getElementById("resultado").innerHTML = "Obesidade de GRAU 2";	
+					document.getElementById("resultado").style.color = "red";
+				} else {
+					document.getElementById("resultado").innerHTML = "Obesidade de GRAU 3";	
+					document.getElementById("resultado").style.color = "red";
+				} 	
+
+				//seta o foco no campo kilos
+				document.getElementById("kilos").focus();				
+				
+				formulario.imc.value = imc;			
+			}
+	</script>
+	
+	<form id="formulario" >
+		
+		<fieldset class="painel">
+			<legend style="margin-top: 20px; color: #4682B4;"><b>Calculo do IMC</b></legend>
+			
+			<label id="msg">
+				Aten&ccedil;&atilde;o! Use ponto (.) como separador decimal
+			</label>
+
+			<br /><br />
+			
+			Kilos:
+			<br /><input type="text" id="kilos" name="kilos" onFocus="exibeMsg(true)" /><br />
+			<br />Metros:
+			<br /><input type="text" name="metros" value="1" onFocus="exibeMsg(false)"/><br />
+			<br />Cm:			
+			<br /><input type="text" name="cm" onFocus="exibeMsg(false)"/><br />			
+			<br />IMC
+			<br /><input type="text" name="imc" disabled="true"/>
+			&nbsp;
+			<label id="resultado"></label>
+			<br />
+			<br /><a href="#" onclick="calcularIMC();"> Calcular IMC </a>
+			
+		</fieldset>	
+	</form>
+ 
+ </body>
+ 
+ </html>
