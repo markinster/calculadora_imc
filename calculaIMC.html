@@ -22,13 +22,13 @@
 				document.getElementById("kilos").focus();	
 			}		
 				
-			function getAltura (metros, centimetros) {
+			var getAltura = function  (metros, centimetros) {
 			    altura = metros * 100 + centimetros;
 				altura = altura / 100;
 				return altura;
 			}
 
-			function exibeMsg(bool) {
+			var exibeMsg = function (bool) {
 				if (bool == true) {
 					document.getElementById("msg").innerHTML = "Aten&ccedil;&atilde;o! Use ponto (.) como separador decimal";
 				} else {
@@ -36,7 +36,7 @@
 				}
 			}
 			
-			function calcularIMC() {
+			var calcularIMC = function () {
 				
 				var formulario = document.getElementById("formulario");				
 				var kilos = +formulario.kilos.value;			
